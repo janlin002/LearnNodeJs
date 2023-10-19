@@ -4,7 +4,7 @@ class TodoModel {
     constructor() {
         this.todos = [
             {
-                titleL: 'model 裡的資料',
+                title: 'model 裡的資料',
                 uid: uuidV4()
             }
         ]
