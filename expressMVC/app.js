@@ -15,7 +15,7 @@ var userRouter = require('./routes/user');
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+app.set('view engine', 'jade');
 // app.set('view engine', 'vash');
 // app.set('views', path.join( __dirname, '/views') );
 

@@ -13,7 +13,10 @@
   "paths": {
     "/todos/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "responses": {
           "200": {
             "description": "OK"
@@ -24,13 +27,20 @@
         "description": "",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "User information.",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "title": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "string"
+                },
+                "uid": {
+                  "type": "string",
+                  "example": "string"
                 }
               }
             }
