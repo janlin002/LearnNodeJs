@@ -9,7 +9,6 @@ const swaggerDocument = require('./swagger-output.json');
 var app = express();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var todosRouter = require('./routes/todos');
 var userRouter = require('./routes/user');
 
@@ -26,7 +25,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/todos', todosRouter);
 app.use('/user', userRouter);
 
