@@ -7,7 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('expressmvc:server');
 var http = require('http');
-
+const { parse } = require('url')
+const wss1 = require('../routes/ws')
 /**
  * Get port from environment and store in Express.
  */
@@ -28,6 +29,19 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+// webSocket
+server.on('upgrade', function upgrade(request, socket, head) {
+  const { pathname } = parse(request.url);
+
+  if (pathname === '/ws') {
+    wss1.handleUpgrade(request, socket, head, function done(ws) {
+      wss1.emit('connection', ws, request);
+    });
+  } else {
+    socket.destroy();
+  }
+});
 
 /**
  * Normalize a port into a number, string, or false.
