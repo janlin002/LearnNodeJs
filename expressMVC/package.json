@@ -21,6 +21,7 @@
     "supertest": "^6.3.3",
     "swagger-autogen": "^2.23.6",
     "swagger-ui-express": "^5.0.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "ws": "^8.14.2"
   }
 }
