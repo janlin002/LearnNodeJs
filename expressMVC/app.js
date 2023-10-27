@@ -11,6 +11,7 @@ var app = express();
 var indexRouter = require('./routes/index');
 var todosRouter = require('./routes/todos');
 var userRouter = require('./routes/user');
+var errorRouter = require('./routes/errorRouter');
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/todos', todosRouter);
 app.use('/user', userRouter);
+app.use('/error', errorRouter);
 
 // swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
