@@ -9,9 +9,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { TeaksService } from './teaks.service';
-import { Task, TaskStatus } from './teaks.model';
+import { Task } from './teaks.model';
 import { CreateTasksDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 
 @Controller('teaks')
 export class TeaksController {
@@ -60,7 +61,11 @@ export class TeaksController {
 
   // http://localhost:3000/teaks/[id]/status
   @Patch('/:id/status')
-  updateTaskStatusById(@Param() id: string, @Body() status: TaskStatus): Task {
+  updateTaskStatusById(
+    @Param() id: string,
+    @Body() updateTaskStatusDto: UpdateTaskStatusDto,
+  ): Task {
+    const { status } = updateTaskStatusDto;
     return this.teaksService.updateTaskStatusById(id, status);
   }
 }
