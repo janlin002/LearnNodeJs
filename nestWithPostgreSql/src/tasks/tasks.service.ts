@@ -38,4 +38,17 @@ export class TasksService {
     await this._tasksRepository.save(task);
     return task;
   }
+
+  async removeTask(id: string): Promise<TasksEntity> {
+    const task = await this.getTaskById(id);
+    await this._tasksRepository.remove(task);
+    return task;
+  }
+
+  async updateTaskStatus(id: string, status: TaskStatus): Promise<TasksEntity> {
+    const task = await this.getTaskById(id);
+    task.status = status;
+    await this._tasksRepository.save(task);
+    return task;
+  }
 }
