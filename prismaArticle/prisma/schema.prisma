@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  email String
+  grade Grade  @unique
+  name  String
+
+  Tester      TestResult[] @relation(name: "student")
+  testsGraded TestResult[] @relation(name: "grade")
+  Course      Course[]
+}
+
+model TestResult {
+  id         Int    @id @default(autoincrement())
+  test_id    Int
+  test       Test   @relation(fields: [test_id], references: [id])
+  student_id Int?
+  student    User?  @relation("student", fields: [student_id], references: [id])
+  grade_id   Grade?
+  grade      User?  @relation("grade", fields: [grade_id], references: [grade])
+}
+
+model Test {
+  id         Int          @id @default(autoincrement())
+  name       String
+  createAt   DateTime     @default(now())
+  cource_id  String
+  TestResult TestResult[]
+  Course     Course?      @relation(fields: [courseId], references: [id])
+  courseId   Int?
+}
+
+model Course {
+  id         Int    @id @default(autoincrement())
+  student_id Int?
+  student    User?  @relation(fields: [student_id], references: [id])
+  Test       Test[]
+}
+
+enum Grade {
+  J
+  S
+  H
+}
